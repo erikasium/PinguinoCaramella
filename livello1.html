@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trova i Cuoricini 💖</title>
+
+
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background: #ffeef8;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      background-image: url('sfondo1.png');
+    }
+
+    h1 {
+      color: #d63384;
+      background: #ffeef8;
+    }
+
+    #grid {
+      display: grid;
+      gap: 8px;
+      justify-content: center;
+      margin: 20px auto;
+    }
+
+    .cell {
+      width: 60px;
+      height: 60px;
+      background-color: #fff0f6;
+      border: 2px solid #f783ac;
+      border-radius: 12px;
+      position: relative;
+      font-size: 12px;
+      color: #d63384;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .cell.found {
+  background-color: #fcc2d7;
+  background-image: url('cuore.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #20c0e3;
+  font-weight: bold;
+  font-size: 8px;
+}
+
+    /* Grid 5x5 default */
+    #grid {
+      grid-template-columns: repeat(5, 60px);
+    }
+
+    /* Responsive per schermi piccoli */
+    @media (max-width: 600px) {
+      #grid {
+        grid-template-columns: repeat(2, 60px);
+      }
+    }
+
+    #next-level {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #f783ac;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: background-color 0.3s;
+  display: none;
+}
+
+#next-level:hover {
+  background-color: #d6336c;
+}
+
+  </style>
+</head>
+<body>
+  <h1>🎁 Trova i Cuoricini! 🎁</h1>
+  <div id="grid"></div>
+<a href="livello2.html" id="next-level" class="hidden">🎉 Prossimo livello</a>
+  <script>
+    const grid = document.getElementById("grid");
+    const compliments = [
+      "💗 Sei la mia stella più brillante!",
+      "🌸 Il tuo sorriso illumina tutto!",
+      "🐧 Sei il mio pinguino preferito!",
+      "💫 Sei dolce come una caramella!",
+      "💖 Grazie per esistere, amore!"
+    ];
+
+    const heartIndexes = new Set();
+    while (heartIndexes.size < 5) {
+      heartIndexes.add(Math.floor(Math.random() * 25));
+    }
+
+    let foundCount = 0;
+
+    for (let i = 0; i < 25; i++) {
+      const cell = document.createElement('button');
+      cell.classList.add('cell');
+
+      cell.addEventListener('click', () => {
+  if (heartIndexes.has(i) && !cell.classList.contains('found')) {
+    cell.classList.add('found');
+    cell.innerText = compliments[foundCount];
+    foundCount++;
+    if (foundCount === 5) {
+      setTimeout(() => {
+        alert("Hai trovato tutti i cuori! Sei adorabile 💞");
+        document.getElementById('next-level').style.display = 'inline-block';
+
+      }, 200);
+    }
+  } else {
+    cell.innerText = "💘 Non qui, continua!";
+  }
+});
+
+      grid.appendChild(cell);
+    }
+  </script>
+</body>
+</html>

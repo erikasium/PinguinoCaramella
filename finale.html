@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Lettera per Caramella</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom right, #cba5ff, #b2fab4);
+      background-image: url('lettera.jpg');
+      background-size: 200px;
+      background-repeat: repeat;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 10px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #6a1b9a;
+      text-align: center;
+      text-shadow: 1px 1px white;
+      margin-bottom: 20px;
+      max-width: 100%;
+      word-wrap: break-word;
+      background-color: white;
+    }
+
+    .lettera-box {
+      background: rgba(255, 255, 255, 0.9);
+      border: 3px dashed #81c784;
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 12px rgba(106, 27, 154, 0.2);
+    }
+
+    .lettera-box p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #4a148c;
+      margin: 0;
+    }
+
+    .firma {
+      margin-top: 25px;
+      text-align: right;
+      font-style: italic;
+      color: #388e3c;
+    }
+
+    .decorazioni {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+      background-color: white;
+    }
+
+    .decorazioni img {
+      width: 40px;
+      height: auto;
+      max-width: 15vw;
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .lettera-box {
+        padding: 16px;
+      }
+
+      .lettera-box p {
+        font-size: 1rem;
+      }
+
+      .decorazioni img {
+        width: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>💌 Una lettera per te, Caramella 💌</h1>
+
+  <div class="decorazioni">
+    <img src="pinguino.png" alt="Pinguino">
+    <img src="cuore.png" alt="Cuore">
+    <img src="caramella.png" alt="Caramella">
+  </div>
+
+  <div class="lettera-box">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fgjhgjhvdhvdfjvfjfdjfvbjvjvjfvjvjfvfjvfj
+       
+      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.  
+      <br><br>
+      Ma questa non è una lettera qualsiasi. È il mio modo per dirti che sei speciale, dolce, unica.
+    </p>
+    <div class="firma">
+      Con affetto,<br>
+      Pinguino 🐧
+    </div>
+  </div>
+
+  <div class="decorazioni">
+    <img src="cuore.png" alt="Cuore">
+    <img src="caramella.png" alt="Caramella">
+    <img src="pinguino.png" alt="Pinguino">
+  </div>
+</body>
+</html>

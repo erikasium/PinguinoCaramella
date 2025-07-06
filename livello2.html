@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory di Noi</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f6;
+      text-align: center;
+      padding: 20px;
+      background-image: url('sfondo2.png');
+    }
+    h1 {
+      color: #d6336c;
+      background-color: #fff0f6;
+    }
+    .grid {
+      display: grid;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .cell {
+      width: 80px;
+      height: 80px;
+      background-color: #ffe3ec;
+      border: 2px solid #f783ac;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cell img {
+      max-width: 60%;
+      display: none;
+    }
+    .cell.revealed img {
+      display: block;
+    }
+
+    #next-level {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #f783ac;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 12px;
+    }
+    #next-level:hover {
+      background-color: #d6336c;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(2, 80px);
+      }
+    }
+
+    @media (min-width: 601px) {
+      .grid {
+        grid-template-columns: repeat(4, 80px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎀 Memory di Noi 🎀</h1>
+  <div class="grid" id="grid"></div>
+  <a href="livello3.html" id="next-level">➡️ Prossimo livello</a>
+
+  <script>
+    const images = [
+      'cuore.png', 'pinguino.png', 'caramella.png', 'luna.png',
+      'cuore.png', 'pinguino.png', 'caramella.png', 'luna.png',
+      'cuore.png', 'pinguino.png', 'caramella.png', 'luna.png',
+      'cuore.png', 'pinguino.png', 'caramella.png', 'luna.png'
+    ];
+
+    let firstCard = null;
+    let secondCard = null;
+    let lock = false;
+    let matches = 0;
+
+    // Shuffle
+    images.sort(() => 0.5 - Math.random());
+
+    const grid = document.getElementById('grid');
+
+    images.forEach((imgSrc, i) => {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+
+      const img = document.createElement('img');
+      img.src = imgSrc;
+
+      cell.appendChild(img);
+      cell.addEventListener('click', () => {
+        if (lock || cell.classList.contains('revealed')) return;
+
+        cell.classList.add('revealed');
+
+        if (!firstCard) {
+          firstCard = cell;
+        } else if (!secondCard) {
+          secondCard = cell;
+          lock = true;
+
+          const img1 = firstCard.querySelector('img').src;
+          const img2 = secondCard.querySelector('img').src;
+
+          if (img1 === img2) {
+            matches++;
+            firstCard = null;
+            secondCard = null;
+            lock = false;
+            if (matches === 8) {
+              document.getElementById('next-level').style.display = 'inline-block';
+            }
+          } else {
+            setTimeout(() => {
+              firstCard.classList.remove('revealed');
+              secondCard.classList.remove('revealed');
+              firstCard = null;
+              secondCard = null;
+              lock = false;
+            }, 800);
+          }
+        }
+      });
+
+      grid.appendChild(cell);
+    });
+  </script>
+</body>
+</html>

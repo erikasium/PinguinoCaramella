@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domande & Emozioni</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive;
+      background-color: #fff0f6;
+      text-align: center;
+      padding: 20px;
+      background-image: url('sfondo3.png');
+    }
+    h1 {
+      color: #d6336c;
+      background-color: #fff0f6;
+    }
+    .question {
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: #fff0f6;
+    }
+    .options {
+      display: grid;
+      gap: 10px;
+      justify-content: center;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .option {
+      padding: 10px;
+      background-color: #ffe3ec;
+      border: 2px solid #f783ac;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .option.correct {
+      background-color: #a3f7bf !important;
+    }
+    .option.wrong {
+      background-color: #ff8787 !important;
+    }
+    #next-level {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #f783ac;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 12px;
+    }
+    #next-level:hover {
+      background-color: #d6336c;
+    }
+  </style>
+</head>
+<body>
+  <h1>💌 Domande & Emozioni 💌</h1>
+  <div class="question" id="question"></div>
+  <div class="options" id="options"></div>
+  <a href="livello4.html" id="next-level">✨ Prossimo livello</a>
+
+  <script>
+    const questions = [
+      {
+        q: "Quando ti ho fatto il commento che ci ha portate a parlare?",
+        a: ["16 maggio 2022", "11 febbraio 2016", "19 ottobre 2020", "27 agosto 2021"],
+        correct: 2
+      },
+      {
+        q: "Quando abbiamo iniziato a parlare su Whatsapp?",
+        a: ["18 gennaio 2021", "25 aprile 2023", "12 dicembre 2020", "4 luglio 2022"],
+        correct: 0
+      },
+      {
+        q: "Quanto amo la luna?",
+        a: ["Un po'", "Abbastanza", "Tantissimo", "Quante sono le stelle in cielo"],
+        correct: 3
+      },
+      {
+        q: "Qual è il primo nome che ti ho dato?",
+        a: ["amo", "Caramella", "piccola", "baby"],
+        correct: 1
+      },
+      {
+        q: "Chi è Imma?",
+        a: ["Gesù ma delle lelle", "mia madre", "una macchina", "il sole"],
+        correct: 0
+      },
+      {
+        q: "Chi è 'Quello rosso'?",
+        a: ["Pancrazio", "Tommy", "Zuzu", "Teresa"],
+        correct: 2
+      },
+      {
+        q: "Chi è lo zio detto 'il macellaio'?",
+        a: ["Zio Franco", "Zio Giuseppe", "Stefano", "tuo cugino pazzo in culo"],
+        correct: 0
+      },
+      {
+        q: "Come si chiama il mio orsetto?",
+        a: ["Paolo", "Pooh", "Mario", "Silvia"],
+        correct: 1
+      },
+      {
+        q: "Chi è Ilaria?",
+        a: ["Mia sorella", "Mio padre", "La tua amante", "Tua cugina"],
+        correct: 2
+      },
+      {
+        q: "Qual è la persona a cui tengo di più?",
+        a: ["Enrico", "Marika", "Celeste (Deve andare a fuoco)", "Tu, baby 💘"],
+        correct: 3
+      }
+    ];
+
+    let current = 0;
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const nextLevelBtn = document.getElementById('next-level');
+
+    function loadQuestion(index) {
+      const q = questions[index];
+      questionEl.innerText = q.q;
+      optionsEl.innerHTML = '';
+
+      q.a.forEach((answer, i) => {
+        const btn = document.createElement('div');
+        btn.classList.add('option');
+        btn.innerText = answer;
+        btn.addEventListener('click', () => {
+          if (i === q.correct) {
+            btn.classList.add('correct');
+            setTimeout(() => {
+              if (current < questions.length - 1) {
+                current++;
+                loadQuestion(current);
+              } else {
+                nextLevelBtn.style.display = 'inline-block';
+                questionEl.innerText = "Hai completato il quiz! Sei incredibile 💖";
+                optionsEl.innerHTML = '';
+              }
+            }, 600);
+          } else {
+            btn.classList.add('wrong');
+            setTimeout(() => {
+              current = 0;
+              loadQuestion(current);
+            }, 1000);
+          }
+        });
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    loadQuestion(current);
+  </script>
+</body>
+</html>
